@@ -1,0 +1,56 @@
+<body>
+    <main>
+        <div class="container">
+            <header>
+                <h2 class="center">Resolutions</h2>
+            </header>
+            <div class="row">
+              {{> loginButtons}}
+                <div class="col s6 offset-s3">
+                    <div>
+
+
+                        <input type="checkbox" checked="{{hideFinished}}" class="filled-in hide-finished" id="hide-finished">
+                        <label for="hide-finished" >Hide finished</label>
+                    </div>
+                    {{#if currentUser}}
+                    <form class="new-resolution center">
+                        <input type="text" name="text" value="" placeholder="New resolution">
+                        <button type="submit" name="name" class="btn waves-effect waves-light ">Submit</button>
+                    </form>
+                    {{/if}}
+
+                    <ul>
+                        {{#each resolutions}} {{> resolution}} {{/each}}
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+</body>
+
+<template name="resolution">
+  <li class="{{#if checked}}checked{{/if}}">
+
+    <h4>
+      {{#if isOwner}}
+      <button type="button" class="toggle-private" name="button">
+        {{#if private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </button>
+
+      <input type="checkbox" checked="{{checked}}" class="toggle-checked filled-in" id="{{_id}}">
+      {{/if}}
+      <label for="{{_id}}">{{text}}</label>
+      {{#if isOwner}}
+      <span ><button type="button" class="btn-floating btn-small waves-effect waves-light red delete" name="button">-</button></span>
+      {{/if}}
+    </h4>
+  </li>
+</template>
